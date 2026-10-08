@@ -121,7 +121,7 @@ for(var y=y0;y<=y1;y++){if(new Date(y,0,1).getTime()<a||new Date(y,0,1).getTime(
 var touch=!window.matchMedia('(hover:hover)').matches;var cur=null;
 items.forEach(function(it){var d=document.createElement('button');d.type='button';d.className='tl-dot';d.style.background=COL[it.g%3];d.style.insetInlineStart=pct(it.t)+'%';
 it.dot=d;
-var tt=it.title?it.title.textContent.trim():'';d.setAttribute('aria-label',tt);tr.appendChild(d);
+var he=document.documentElement.dir==='rtl';var sp=it.title&&it.title.querySelector(he?'.he':'.en');var tt=sp?sp.textContent.trim():(it.title?it.title.textContent.trim():'');d.setAttribute('aria-label',tt);tr.appendChild(d);
 d.addEventListener('mouseenter',function(){if(!touch)show(it)});d.addEventListener('mouseleave',function(){if(!touch)hide()});
 d.addEventListener('focus',function(){if(!touch)show(it)});d.addEventListener('blur',function(){if(!touch)hide()});
 d.addEventListener('click',function(e){e.stopPropagation();if(touch){cur===it?hide():show(it)}else go(it)});});
