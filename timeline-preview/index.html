@@ -58,7 +58,7 @@ html[dir=rtl] body{font-family:Arial,'Segoe UI',Tahoma,sans-serif}html[dir=rtl] 
 .activity ul.alist:nth-of-type(3) a.asrc,.activity ul.alist:nth-of-type(3) div.asrc a{background:rgba(15,45,49,.10);color:#0f2d31}
 .activity a.asrc:hover,.activity div.asrc a:hover{text-decoration:none;filter:brightness(.94)}
 @media(max-width:700px){.activity a.asrc{margin-top:4px;padding-top:5px}.activity div.asrc{padding-top:4px}}
-.tl.m .tl-rl i{display:none}.tl.m .tl-rl{transform:translateY(-6px);color:#fff;font-weight:700;padding:4px 9px;border-radius:6px;line-height:1}.tl.m .tl-rl[data-g="0"]{background:#2b8e93}.tl.m .tl-rl[data-g="1"]{background:#5f9488}.tl.m .tl-rl[data-g="2"]{background:#0f2d31}
+.tl.m .tl-rl i{display:none}.tl.m .tl-rl{transform:none;color:#fff;font-weight:700;padding:4px 9px;border-radius:6px;line-height:1}.tl.m .tl-rl[data-g="0"]{background:#2b8e93}.tl.m .tl-rl[data-g="1"]{background:#5f9488}.tl.m .tl-rl[data-g="2"]{background:#0f2d31}
 
 
 </style>
@@ -164,14 +164,14 @@ cl.forEach(function(c){c.its.forEach(function(it,j){it.x=c.s+j*S})});
 function place(c){var n=c.its.length;c.s=c.sum/n-(n-1)*S/2;c.s=Math.max(lo,Math.min(hi-(n-1)*S,c.s));}}
 function layout(){var w=tr.clientWidth;if(!w)return;var mob=w<480;tl.classList.toggle('m',mob);
 var lw=0;rls.forEach(function(r){lw=Math.max(lw,r.offsetWidth)});
-var RH=mob?36:30,PT=mob?2:4,LY=mob?26:RH/2,S=mob?12.5:16,R=mob?5:6;
+var RH=mob?26:30,PT=mob?32:4,LY=RH/2,S=mob?12.5:16,R=mob?5:6;
 X0=(mob?0:lw+22)+R+2;X1=w-R-2;
 var rowY=[];for(var g=0;g<NG;g++)rowY.push(PT+g*RH+LY);
 var AY=PT+NG*RH+(mob?4:6);tr.style.height=(AY+24)+'px';
 ax.style.cssText='left:'+(X0-R-2)+'px;right:0;top:'+AY+'px';
 svg.setAttribute('width',w);svg.setAttribute('height',AY+2);
 rows.forEach(function(rw,g){rw.style.cssText='left:'+(X0-R-2)+'px;right:0;top:'+rowY[g]+'px'});
-rls.forEach(function(r,g){r.style.top=(mob?rowY[g]-22:rowY[g])+'px'});
+var cx=0;rls.forEach(function(r,g){if(mob){r.style.top='4px';r.style.left=cx+'px';cx+=r.offsetWidth+6}else{r.style.left='0px';r.style.top=rowY[g]+'px'}});
 ticks.forEach(function(k){k.style.left=px(+k.dataset.t)+'px';k.style.top=AY+'px'});
 var lanes={};items.forEach(function(it){it.x0=px(it.t);(lanes[it.g]=lanes[it.g]||[]).push(it)});
 Object.keys(lanes).forEach(function(g){dodge(lanes[g],S,X0,X1)});
